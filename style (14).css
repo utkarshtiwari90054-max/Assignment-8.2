@@ -1,0 +1,54 @@
+:root {
+  --ink: #1c2a26;
+  --muted: #5d6b66;
+  --bg: #f3f5f2;
+  --accent: #1f6f5c;
+  --gap: 1rem;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  padding: 2rem 1.25rem 3rem;
+}
+
+.page-header { text-align: center; margin-bottom: 2rem; }
+.page-header h1 { font-size: 2rem; }
+.page-header p { color: var(--muted); }
+
+/* ===== Auto-responsive grid =====
+   auto-fit creates as many columns as will fit.
+   minmax(220px, 1fr): each column is at least 220px wide
+   and shares leftover space equally.
+   No media queries are needed. */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--gap);                 /* consistent spacing */
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.gallery-item {
+  aspect-ratio: 4 / 3;             /* every tile is the same shape */
+  overflow: hidden;
+  border-radius: 10px;
+  background: #dfe9e4;
+}
+
+.gallery-item img {
+  display: block;
+  width: 100%;                     /* fill the tile width */
+  height: 100%;
+  object-fit: cover;               /* crop to fill, never stretch */
+  transition: transform .3s ease;
+}
+.gallery-item:hover img { transform: scale(1.05); }
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-item img { transition: none; }
+  .gallery-item:hover img { transform: none; }
+}
